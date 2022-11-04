@@ -388,6 +388,7 @@ present day data with the following command.
 
 ```{r load-present-data}
 data(present)
+write.table(present, file="Exported_present.csv", sep=",") #Exporting the table to a file
 ```
 
 The data are stored in a data frame called `present` which should now be loaded in 

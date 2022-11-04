@@ -1,5 +1,5 @@
-# 25-10-2022
-# Converting "Introduction to R and RSTudio" to Python
+# David Aurelio
+# Converting "Introduction to R and RStudio" to Python
 # Done using PyCharm. Note the imported data files were placed in the project directory for easy import.
 
 # Note: R uses the following libraries:
@@ -91,14 +91,18 @@ plt.ylabel("Boys/total ") #Adding a label to y-axis
 plt.legend() # This allow the label of the curve to be plotted
 plt.show()
 
+
 # Adding to a data frame a new column with a TRUE boolean variable if that year more boys were born
+more_boys=[] #Creating a list to save boolean data. First entry will be column name when I append do dataframe
 for i in range(0,len(df2)): # Loop to run through all 82 rows of the dataframe
     if df2["boys"][i] > df2["girls"][i]: #Comparing the number of boys to girls in each row "i" and if it is larger
-        more_boys = True            # set the boolean variable to true in that row of the df2 dataframe
+        more_boys.append(True)           #Adding to the list by using .append the boolean value
     else:
-        more_boys = False
+        more_boys.append(False)
 
-df2=df.assign(MoreBoys=more_boys) #Adding/assigning the a Boolean variable as a column in the data frame df2
+df_more_boys = pd.DataFrame(more_boys) #Converting list to a dataframe to then add a new column to df2
+print(df_more_boys.head()) # Checking the first rows of the new dataframe
+df2=df.assign(MoreBoys=df_more_boys) #Adding/assigning the a Boolean variable as a column in the data frame df2
 print(df2)
 
 ## Loading a new dataset named "present" ##
@@ -136,11 +140,14 @@ plt.ylabel("Prop_boys") #Adding a label to y-axis
 plt.legend() # This allow the label of the curve to be plotted
 plt.show()
 # Adding a True boolean variable to df3 if there are more boys than girls each year
-for i in range(1,len(df3)): # Note that the data for "present" start at index 1 not 0 like before.
+more_boys3=[] #Creating a list to put bollean values
+for i in range(1,len(df3)+1): # Note that the data for "present" start at index 1 not 0 like before.
     if df3["boys"][i] > df3["girls"][i]: #Comparing the number of boys to girls in each row "i" and if it is larger
-        more_boys3 = True            # set the boolean variable to true in that row of the df2 dataframe
+        more_boys3.append(True)          # adding to the list the values using .append
     else:
-        more_boys3 = False
+        more_boys3.append(False)
+df_more_boys3 = pd.DataFrame(more_boys3) #Converting list to a dataframe to then add a new column to df3
+print(df_more_boys3.head()) # Checking the first rows of the new dataframe
 df3=df3.assign(MoreBoys=more_boys3) #Adding/assigning the a Boolean variable as a column in the data frame
 print(df3)
 
